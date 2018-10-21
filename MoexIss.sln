@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoexIssAPI", "src\MoexIssAPI\MoexIssAPI.csproj", "{E89B8BDF-F90D-4BD1-8769-D1F141B7B26E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoexIssAPI.Test", "test\MoexIssAPI.Test\MoexIssAPI.Test.csproj", "{A7605836-D8C1-4326-829D-511D05CA6C79}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E89B8BDF-F90D-4BD1-8769-D1F141B7B26E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E89B8BDF-F90D-4BD1-8769-D1F141B7B26E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E89B8BDF-F90D-4BD1-8769-D1F141B7B26E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E89B8BDF-F90D-4BD1-8769-D1F141B7B26E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7605836-D8C1-4326-829D-511D05CA6C79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7605836-D8C1-4326-829D-511D05CA6C79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7605836-D8C1-4326-829D-511D05CA6C79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7605836-D8C1-4326-829D-511D05CA6C79}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {56B8C224-4C1B-4AB5-B0C8-9BF27F3F439F}
+	EndGlobalSection
+EndGlobal
