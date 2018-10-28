@@ -6,6 +6,9 @@ using Newtonsoft.Json.Linq;
 
 namespace MoexIssAPI
 {
+    /// <summary>
+    /// Десериализатор json-а ответа ISS в объект
+    /// </summary>
     class JsonIssResponseToObjectConverter : Newtonsoft.Json.JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

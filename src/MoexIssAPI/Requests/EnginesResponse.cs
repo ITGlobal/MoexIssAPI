@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace MoexIssAPI
+namespace MoexIssAPI.Requests
 {
     /// <summary>
     /// Ответ на запрос списка доступных торговых систем

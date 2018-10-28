@@ -1,24 +1,40 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MoexIssAPI.Requests;
 using Newtonsoft.Json;
 using Xunit;
 
 namespace MoexIssAPI.Test
 {
-    public class IssResponsePayloadTests
+    /// <summary>
+    /// “естирование основных запросов
+    /// </summary>
+    public class MainRequestsTests
     {
+        /// <summary>
+        /// “естирование получени€ списка торговых систем
+        /// </summary>
         [Fact]
-        public void DeserializationTest()
+        public void EnginesListTest()
         {
             var request = new EnginesRequest();
-            foreach (var engine in request.Response.Engines.Data)
-            {
-                var marketsRequest = new MarketsRequest(engine["name"]);
-                var response = marketsRequest.Response;
-            }
+            Assert.Equal(6, request.Response.Engines.Data.Count);
         }
 
+        /// <summary>
+        /// “естирование получение списка рынков одной из торговых систем
+        /// </summary>
+        [Fact]
+        public void MarketsListTest()
+        {
+            var marketsRequest = new MarketsRequest("stock");
+            Assert.Equal(13, marketsRequest.Response.Markets.Data.Count);
+        }
+
+        /// <summary>
+        /// “естирование получение списка инструментов рынка
+        /// </summary>
         [Fact]
         public void SecuritiesListTest()
         {
@@ -39,10 +55,6 @@ namespace MoexIssAPI.Test
                     if (type != "ofz_bond")
                         ;
                 }
-
-                
-
-
             }
         }
     }
