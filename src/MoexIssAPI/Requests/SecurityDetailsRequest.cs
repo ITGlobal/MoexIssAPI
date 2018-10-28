@@ -1,8 +1,16 @@
-﻿namespace MoexIssAPI.Requests
+﻿using Newtonsoft.Json;
+
+namespace MoexIssAPI.Requests
 {
-    class SecurityDetailsRequest
+    public class SecurityDetailsRequest : IssRequest
     {
-        // https://iss.moex.com/iss/engines/stock/markets/bonds/securities/SU25083RMFS5.json
-        // тут есть информация о купонах
+        public SecurityDetailsRequest(string engine, string market, string secCode)
+        {
+            _url = $"{BaseUrl}engines/{engine}/markets/{market}/securities/{secCode}.json";
+            var json = Fetch();
+            Response = JsonConvert.DeserializeObject<SecurityDetailsResponse>(json);
+        }
+
+        public SecurityDetailsResponse Response { get; }
     }
 }

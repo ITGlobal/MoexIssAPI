@@ -35,6 +35,7 @@ namespace MoexIssAPI.Test
         /// <summary>
         /// Тестирование получение списка инструментов рынка
         /// </summary>
+        //[Fact]
         public void SecuritiesListTest()
         {
             var request = new MarketSecuritiesListRequest("stock", "bonds");
@@ -53,6 +54,8 @@ namespace MoexIssAPI.Test
                     var type = secDefRequest.Response.Description.Data.FirstOrDefault(_ => _["name"] == "TYPE")["value"];
                     if (type != "ofz_bond")
                         ;
+
+                    var secDetailsRequest = new SecurityDetailsRequest("stock", "bonds", sec["SECID"]);
                 }
             }
         }

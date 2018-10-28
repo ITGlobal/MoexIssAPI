@@ -9,7 +9,6 @@ namespace MoexIssAPI.Requests
             _url = $"{BaseUrl}securities/{secCode}.json";
             var json = Fetch();
             Response = JsonConvert.DeserializeObject<SecurityDefinitionResponse>(json);
-
         }
 
         public SecurityDefinitionResponse Response { get; }
