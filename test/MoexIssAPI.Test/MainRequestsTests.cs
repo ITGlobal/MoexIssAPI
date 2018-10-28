@@ -35,7 +35,6 @@ namespace MoexIssAPI.Test
         /// <summary>
         /// Тестирование получение списка инструментов рынка
         /// </summary>
-        [Fact]
         public void SecuritiesListTest()
         {
             var request = new MarketSecuritiesListRequest("stock", "bonds");
