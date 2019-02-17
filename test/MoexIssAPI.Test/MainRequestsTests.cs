@@ -19,7 +19,7 @@ namespace MoexIssAPI.Test
         public void EnginesListTest()
         {
             var request = new EnginesRequest();
-            Assert.Equal(6, request.Response.Engines.Data.Count);
+            Assert.Equal(7, request.Response.Engines.Data.Count);
         }
 
         /// <summary>
@@ -30,6 +30,9 @@ namespace MoexIssAPI.Test
         {
             var marketsRequest = new MarketsRequest("stock");
             Assert.Equal(13, marketsRequest.Response.Markets.Data.Count);
+
+            marketsRequest = new MarketsRequest("futures");
+            Assert.Equal(5, marketsRequest.Response.Markets.Data.Count);
         }
 
         /// <summary>
@@ -58,6 +61,28 @@ namespace MoexIssAPI.Test
                     var secDetailsRequest = new SecurityDetailsRequest("stock", "bonds", sec["SECID"]);
                 }
             }
+        }
+
+        [Fact]
+        public void FuturesListTest()
+        {
+            var request = new MarketSecuritiesListRequest("futures", "forts");
+            var futures = request.Response.Securities;
+            Assert.InRange(futures.Data.Count,150,200);
+            request = new MarketSecuritiesListRequest("futures", "options");
+            var options = request.Response.Securities;
+            Assert.InRange(options.Data.Count, 8500, 11000);
+        }
+
+
+
+        [Fact]
+        public void FuturesDefinitionAndDetailsTest()
+        {
+            var request = new MarketSecuritiesListRequest("futures", "forts");
+            var futures = request.Response.Securities.Data[0];
+            var secDefRequest = new SecurityDefinitionRequest(futures["SECID"]);
+            var secDetailsRequest = new SecurityDetailsRequest("futures", "forts", futures["SECID"]);
         }
     }
 }
