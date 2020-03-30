@@ -16,4 +16,5 @@ namespace MoexIssAPI.Requests
 
         public MarketSecuritiesListResponse Response { get; }
     }
+
 }

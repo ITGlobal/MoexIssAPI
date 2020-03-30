@@ -68,10 +68,10 @@ namespace MoexIssAPI.Test
         {
             var request = new MarketSecuritiesListRequest("futures", "forts");
             var futures = request.Response.Securities;
-            Assert.InRange(futures.Data.Count,150,200);
+            Assert.True(futures.Data.Count>150);
             request = new MarketSecuritiesListRequest("futures", "options");
             var options = request.Response.Securities;
-            Assert.InRange(options.Data.Count, 8500, 11000);
+            Assert.True(options.Data.Count>8500);
         }
 
 
@@ -84,5 +84,21 @@ namespace MoexIssAPI.Test
             var secDefRequest = new SecurityDefinitionRequest(futures["SECID"]);
             var secDetailsRequest = new SecurityDetailsRequest("futures", "forts", futures["SECID"]);
         }
+
+
+        [Fact]
+        public void SecurityHistoryTest()
+        {
+            var req = new SecurityHistoryRequest("stock", "bonds", "SU26208RMFS7");
+            var resp = req.Response;
+            Assert.Equal(3166, resp.Object.Data.Count);
+
+            req = new SecurityHistoryRequest("stock", "bonds", "TQOB", "SU26208RMFS7");
+            resp = req.Response;
+            Assert.Equal(1494, resp.Object.Data.Count);
+
+        }
+
+
     }
 }
