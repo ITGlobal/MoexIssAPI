@@ -25,4 +25,9 @@ get security history data
 ```csharp
 var history = new SecurityHistoryRequest(engine,market, security).Response.Object.Data;
 ```
+or 
+
+```csharp
+var history = new SecurityHistoryRequest(engine,market,board,security).Response.Object.Data;
+```
 
