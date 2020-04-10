@@ -99,6 +99,12 @@ namespace MoexIssAPI.Test
 
         }
 
+        [Fact]
+        public void BondCouponsTest()
+        {
+            var req = new BondCouponsRequest("SU26208RMFS7");
+            Assert.Equal(14, req.Response.Coupons.Data.Count);
+        }
 
     }
 }
