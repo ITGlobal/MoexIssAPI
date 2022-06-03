@@ -17,9 +17,9 @@ namespace MoexIssAPI
 
         protected const string BaseUrl = "https://iss.moex.com/iss/";
 
-        protected string? _url;
+        protected string _url;
 
-        protected IWebProxy? _webProxy;
+        protected IWebProxy _webProxy;
 
         #endregion
 
