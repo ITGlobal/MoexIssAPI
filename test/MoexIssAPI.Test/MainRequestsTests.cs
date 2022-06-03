@@ -1,50 +1,46 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using MoexIssAPI.Requests;
-using Newtonsoft.Json;
+п»їusing MoexIssAPI.Requests;
 using Xunit;
 
 namespace MoexIssAPI.Test
 {
     /// <summary>
-    /// Тестирование основных запросов
+    /// РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ РѕСЃРЅРѕРІРЅС‹С… Р·Р°РїСЂРѕСЃРѕРІ
     /// </summary>
     public class MainRequestsTests
     {
         /// <summary>
-        /// Тестирование получения списка торговых систем
+        /// РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ РїРѕР»СѓС‡РµРЅРёСЏ СЃРїРёСЃРєР° С‚РѕСЂРіРѕРІС‹С… СЃРёСЃС‚РµРј
         /// </summary>
         [Fact]
-        public void EnginesListTest()
+        public async Task EnginesListTest()
         {
-            var request = new EnginesRequest();
-            Assert.Equal(7, request.Response.Engines.Data.Count);
+            var resp = await new EnginesRequest().Get();
+            Assert.Equal(9, resp.Engines.Data.Count);
         }
 
         /// <summary>
-        /// Тестирование получение списка рынков одной из торговых систем
+        /// РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ РїРѕР»СѓС‡РµРЅРёРµ СЃРїРёСЃРєР° СЂС‹РЅРєРѕРІ РѕРґРЅРѕР№ РёР· С‚РѕСЂРіРѕРІС‹С… СЃРёСЃС‚РµРј
         /// </summary>
         [Fact]
-        public void MarketsListTest()
+        public async Task MarketsListTest()
         {
-            var marketsRequest = new MarketsRequest("stock");
-            Assert.Equal(13, marketsRequest.Response.Markets.Data.Count);
+            var markets = await new MarketsRequest("stock").Get();
+            Assert.Equal(17, markets.Markets.Data.Count);
 
-            marketsRequest = new MarketsRequest("futures");
-            Assert.Equal(5, marketsRequest.Response.Markets.Data.Count);
+            markets = await new MarketsRequest("futures").Get();
+            Assert.Equal(5, markets.Markets.Data.Count);
         }
 
         /// <summary>
-        /// Тестирование получение списка инструментов рынка
+        /// РўРµСЃС‚РёСЂРѕРІР°РЅРёРµ РїРѕР»СѓС‡РµРЅРёРµ СЃРїРёСЃРєР° РёРЅСЃС‚СЂСѓРјРµРЅС‚РѕРІ СЂС‹РЅРєР°
         /// </summary>
         //[Fact]
-        public void SecuritiesListTest()
+        public async Task SecuritiesListTest()
         {
-            var request = new MarketSecuritiesListRequest("stock", "bonds");
+            var response = await new MarketSecuritiesListRequest("stock", "bonds").Get();
             var ofz = new List<Dictionary<string, string>>();
             var types = new List<string>();
-            foreach (var sec in request.Response.Securities.Data)
+            foreach (var sec in response.Securities.Data)
             {
                 var secType = sec["SECTYPE"];
                 if (!types.Contains(secType))
@@ -53,57 +49,50 @@ namespace MoexIssAPI.Test
                 if (secType == "3")
                 {
                     ofz.Add(sec);
-                    var secDefRequest = new SecurityDefinitionRequest(sec["SECID"]);
-                    var type = secDefRequest.Response.Description.Data.FirstOrDefault(_ => _["name"] == "TYPE")["value"];
-                    if (type != "ofz_bond")
-                        ;
-
-                    var secDetailsRequest = new SecurityDetailsRequest("stock", "bonds", sec["SECID"]);
+                    var secDefRequest = await new SecurityDefinitionRequest(sec["SECID"]).Get();
+                    var type = secDefRequest.Description.Data.FirstOrDefault(_ => _["name"] == "TYPE")["value"];
+                    var secDetailsRequest = await new SecurityDetailsRequest("stock", "bonds", sec["SECID"]).Get();
                 }
             }
         }
 
         [Fact]
-        public void FuturesListTest()
+        public async Task FuturesListTest()
         {
-            var request = new MarketSecuritiesListRequest("futures", "forts");
-            var futures = request.Response.Securities;
-            Assert.True(futures.Data.Count>150);
-            request = new MarketSecuritiesListRequest("futures", "options");
-            var options = request.Response.Securities;
-            Assert.True(options.Data.Count>8500);
+            var response = await new MarketSecuritiesListRequest("futures", "forts").Get();
+            var futures = response.Securities;
+            Assert.True(futures.Data.Count > 300);
+            response = await new MarketSecuritiesListRequest("futures", "options").Get();
+            var options = response.Securities;
+            Assert.True(options.Data.Count > 8500);
         }
 
-
-
         [Fact]
-        public void FuturesDefinitionAndDetailsTest()
+        public async Task FuturesDefinitionAndDetailsTest()
         {
-            var request = new MarketSecuritiesListRequest("futures", "forts");
-            var futures = request.Response.Securities.Data[0];
-            var secDefRequest = new SecurityDefinitionRequest(futures["SECID"]);
-            var secDetailsRequest = new SecurityDetailsRequest("futures", "forts", futures["SECID"]);
+            var request = await new MarketSecuritiesListRequest("futures", "forts").Get();
+            var futures = request.Securities.Data[0];
+            var secDefRequest = await new SecurityDefinitionRequest(futures["SECID"]).Get();
+            var secDetailsRequest = await new SecurityDetailsRequest("futures", "forts", futures["SECID"]).Get();
         }
 
 
         [Fact]
-        public void SecurityHistoryTest()
+        public async Task SecurityHistoryTest()
         {
-            var req = new SecurityHistoryRequest("stock", "bonds", "SU26208RMFS7");
-            var resp = req.Response;
+            var resp = await new SecurityHistoryRequest("stock", "bonds", "SU26208RMFS7").Get();
             Assert.Equal(3166, resp.Object.Data.Count);
 
-            req = new SecurityHistoryRequest("stock", "bonds", "TQOB", "SU26208RMFS7");
-            resp = req.Response;
+            resp = await new SecurityHistoryRequest("stock", "bonds", "TQOB", "SU26208RMFS7").Get();
             Assert.Equal(1494, resp.Object.Data.Count);
 
         }
 
         [Fact]
-        public void BondCouponsTest()
+        public async Task BondCouponsTest()
         {
-            var req = new BondCouponsRequest("SU26208RMFS7");
-            Assert.Equal(14, req.Response.Coupons.Data.Count);
+            var req = await new BondCouponsRequest("SU26208RMFS7").Get();
+            Assert.Equal(14, req.Coupons.Data.Count);
         }
 
     }
