@@ -1,19 +1,25 @@
-﻿using Newtonsoft.Json;
+﻿using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace MoexIssAPI.Requests
 {
     /// <summary>
     /// Запрос доступных торговых систем
     /// </summary>
-    public class EnginesRequest : IssRequest
+    public class EnginesRequest : IssRequest, IGetRequest<EnginesResponse>
     {
-        public EnginesRequest()
+        public EnginesRequest(IWebProxy webProxy = null)
         {
             _url = $"{BaseUrl}engines.json";
-            var json = Fetch();
-            Response = JsonConvert.DeserializeObject<EnginesResponse>(json);
+            _webProxy = webProxy;
         }
-        
-        public EnginesResponse Response { get; }
+
+        public async Task<EnginesResponse> Get(CancellationToken token = default)
+        {
+            var json = await Fetch(token: token);
+            return JsonConvert.DeserializeObject<EnginesResponse>(json);
+        }
     }
 }

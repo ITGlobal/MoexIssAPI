@@ -21,6 +21,5 @@ namespace MoexIssAPI.Requests
                  new Dictionary<string, string>() { { "from", from.ToString() }, { "till", till.ToString() } })
         {
         }
-
     }
 }

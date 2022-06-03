@@ -1,16 +1,20 @@
-﻿using Newtonsoft.Json;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace MoexIssAPI.Requests
 {
-    public class SecurityDefinitionRequest : IssRequest
+    public class SecurityDefinitionRequest : IssRequest, IGetRequest<SecurityDefinitionResponse>
     {
         public SecurityDefinitionRequest(string secCode)
         {
             _url = $"{BaseUrl}securities/{secCode}.json";
-            var json = Fetch();
-            Response = JsonConvert.DeserializeObject<SecurityDefinitionResponse>(json);
         }
 
-        public SecurityDefinitionResponse Response { get; }
+        public async Task<SecurityDefinitionResponse> Get(CancellationToken token = default)
+        {
+            var json = await Fetch(token: token);
+            return JsonConvert.DeserializeObject<SecurityDefinitionResponse>(json);
+        }
     }
 }

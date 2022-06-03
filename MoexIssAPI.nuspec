@@ -18,7 +18,7 @@
     <summary>C# wrapper for https://iss.moex.com</summary>
   </metadata>
   <files>
-    <file src="out\netstandard2.0\MoexIssAPI.dll" target="lib\netstandard2.0" />    
+    <file src="out\net6.0\MoexIssAPI.dll" target="lib\net6.0" />    
   </files>
 </package>
 
