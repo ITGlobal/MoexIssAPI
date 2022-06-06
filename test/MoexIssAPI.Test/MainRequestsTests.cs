@@ -90,10 +90,20 @@ namespace MoexIssAPI.Test
         {
             var resp = await new SecurityHistoryRequest("stock", "bonds", "SU26208RMFS7").Get();
             Assert.Equal(3166, resp.Object.Data.Count);
+        }
 
-            resp = await new SecurityHistoryRequest("stock", "bonds", "TQOB", "SU26208RMFS7").Get();
+        [Fact]
+        public async Task ShouldGetOneSecurityTest()
+        {
+            var resp = await new SecurityHistoryRequest("stock", "bonds", "TQOB", "SU26208RMFS7").Get();
             Assert.Equal(1494, resp.Object.Data.Count);
+        }
 
+        [Fact]
+        public async Task ShouldGetOneEngineMarketBoardSecurityTest()
+        {
+            var resp = await new EngineMarketBoardSecurityRequest("stock", "bonds", "TQBR", "SBER").Get();
+            Assert.Equal(1, resp.Marketdata.Data.Count);
         }
 
         [Fact]
@@ -102,6 +112,5 @@ namespace MoexIssAPI.Test
             var req = await new BondCouponsRequest("SU26208RMFS7").Get();
             Assert.Equal(14, req.Coupons.Data.Count);
         }
-
     }
 }

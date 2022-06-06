@@ -19,5 +19,8 @@ namespace MoexIssAPI.Requests
 
         [JsonProperty("marketdata")]
         public IssResponsePayload Marketdata { get; set; }
+
+        [JsonProperty("dataversion")]
+        public IssResponsePayload Dataversion { get; set; }
     }
 }
