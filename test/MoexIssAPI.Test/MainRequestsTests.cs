@@ -8,12 +8,20 @@ namespace MoexIssAPI.Test
     /// </summary>
     public class MainRequestsTests
     {
+        // private IWebProxy _proxy = new WebProxy(
+        //     new Uri("socks5://130.193.43.137:3131"),
+        //     true, 
+        //     null, 
+        //     new NetworkCredential("proxyuser", "")
+        // );
+
         /// <summary>
         /// Тестирование получения списка торговых систем
         /// </summary>
         [Fact]
         public async Task EnginesListTest()
         {
+            // var resp = await new EnginesRequest(webProxy: _proxy).Get();
             var resp = await new EnginesRequest().Get();
             Assert.Equal(9, resp.Engines.Data.Count);
         }
