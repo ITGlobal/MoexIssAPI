@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
@@ -6,9 +7,10 @@ namespace MoexIssAPI.Requests
 {
     public class SecurityDefinitionRequest : IssRequest, IGetRequest<SecurityDefinitionResponse>
     {
-        public SecurityDefinitionRequest(string secCode)
+        public SecurityDefinitionRequest(string secCode, IWebProxy webProxy = null)
         {
             _url = $"{BaseUrl}securities/{secCode}.json";
+            _webProxy = webProxy;
         }
 
         public async Task<SecurityDefinitionResponse> Get(CancellationToken token = default)

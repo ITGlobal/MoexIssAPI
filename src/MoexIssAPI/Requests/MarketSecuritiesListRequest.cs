@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
@@ -9,9 +10,10 @@ namespace MoexIssAPI.Requests
     /// </summary>
     public class MarketSecuritiesListRequest : IssRequest, IGetRequest<MarketSecuritiesListResponse>
     {
-        public MarketSecuritiesListRequest(string engine, string market)
+        public MarketSecuritiesListRequest(string engine, string market, IWebProxy webProxy = null)
         {
             _url = $"{BaseUrl}engines/{engine}/markets/{market}/securities.json";
+            _webProxy = webProxy;
         }
 
         public async Task<MarketSecuritiesListResponse> Get(CancellationToken token = default)

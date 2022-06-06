@@ -14,6 +14,10 @@ namespace MoexIssAPI.Requests
         [JsonProperty("history.cursor")]
         public IssResponsePayload Cursor { get; set; }
 
+        [JsonProperty("securities")]
+        public IssResponsePayload Securities { get; set; }
 
+        [JsonProperty("marketdata")]
+        public IssResponsePayload Marketdata { get; set; }
     }
 }
