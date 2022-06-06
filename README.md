@@ -5,33 +5,33 @@ MoexIssAPI
 get engines list
 
 ```csharp
-var engines = new EnginesRequest().Response.Engines.Data;
+var engines = (await new EnginesRequest().Get()).Engines.Data;
 ```
 
 get markets list
 
 ```csharp
-var markets = new MarketsRequest(engine).Response.Markets.Data;
+var markets = (await new MarketsRequest(engine).Get()).Markets.Data;
 ```
 
 get securities list
 
 ```csharp
-var securities = new MarketSecuritiesListRequest(engine, market).Response.Securities.Data;
+var securities = (await new MarketSecuritiesListRequest(engine, market).Get()).Securities.Data;
 ```
 
 get security history data
 
 ```csharp
-var history = new SecurityHistoryRequest(engine,market, security).Response.Object.Data;
+var history = (await new SecurityHistoryRequest(engine,market, security).Get()).Object.Data;
 ```
 or 
 
 ```csharp
-var history = new SecurityHistoryRequest(engine,market,board,security).Response.Object.Data;
+var history = (await new SecurityHistoryRequest(engine,market,board,security).Get()).Object.Data;
 ```
 bond coupons
 
 ```csharp
-var history = new BondCopunsRequest(security).Response.Coupons.Data;
+var history = (await new BondCopunsRequest(security).Get()).Coupons.Data;
 ```
