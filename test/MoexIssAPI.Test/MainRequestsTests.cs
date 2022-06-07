@@ -1,4 +1,5 @@
-﻿using MoexIssAPI.Requests;
+﻿using MoexIssAPI.Helper;
+using MoexIssAPI.Requests;
 using Xunit;
 
 namespace MoexIssAPI.Test
@@ -109,8 +110,17 @@ namespace MoexIssAPI.Test
         [Fact]
         public async Task BondCouponsTest()
         {
-            var req = await new BondCouponsRequest("SU26208RMFS7").Get();
+            var req = await new BondCouponsRequest("SU26208RMFS7", null).Get();
             Assert.Equal(14, req.Coupons.Data.Count);
+        }
+
+        
+        [Fact]
+        public void QueryHelperCompileTest()
+        {
+            string? undefined = null;
+            var result = QueryHelper.Compile(new { some = "123", date = new DateTime(2000, 1, 1), undefined });
+            Assert.Equal("?some=123&date=2000-01-01", result);
         }
     }
 }

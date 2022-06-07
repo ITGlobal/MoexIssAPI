@@ -1,13 +1,16 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MoexIssAPI.Requests
 {
     public class BondCouponsResponse
     {
-        [JsonProperty("coupons")]
-        public IssResponsePayload Coupons { get; set; }
+    [JsonProperty("amortizations")]
+    public IssResponsePayload Amortizations { get; set; }
+
+    [JsonProperty("coupons")]
+    public IssResponsePayload Coupons { get; set; }
+
+    [JsonProperty("offers")]
+    public IssResponsePayload Offers { get; set; }
     }
 }

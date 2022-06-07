@@ -8,13 +8,14 @@ namespace MoexIssAPI.Requests
 {
     public abstract class CursorRequest<T>: IssRequest, IGetRequest<T> where T: ICursorResponse
     {
-        Dictionary<string, string> adds = new Dictionary<string, string>();
-        public CursorRequest(string url, IDictionary<string,string> opts=null, IWebProxy webProxy = null)
+        private Dictionary<string, object> adds = new Dictionary<string, object>();
+        
+        public CursorRequest(string url, IDictionary<string,object> opts=null, IWebProxy webProxy = null)
         {
             _url = url;
             _webProxy = webProxy;
             if (opts != null)
-             adds = new Dictionary<string, string>(opts);
+             adds = new Dictionary<string, object>(opts);
         }
 
         public async Task<T> Get(CancellationToken token = default)

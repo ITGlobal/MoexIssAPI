@@ -6,3 +6,11 @@ GET https://iss.moex.com/iss/history/engines/stock/markets/shares/boards/TQBR/se
 
 ### 
 GET https://iss.moex.com/iss/engines/stock/markets/shares/boards/TQBR/securities/SBER.json
+
+###
+
+GET https://iss.moex.com/iss/engines/stock/markets/index/securities/ABRD.json
+
+###
+
+GET https://iss.moex.com/iss/engines/stock/markets/shares/securities/SBER/candles.json?interval=24&iss.reverse=true

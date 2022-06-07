@@ -5,6 +5,12 @@ using Newtonsoft.Json;
 
 namespace MoexIssAPI.Requests
 {
+    /// <summary>
+    ///     Получить спецификацию инструмента <br />
+    ///     Макет запроса: /iss/securities/[security] <br />
+    ///     Описание параметров: https://iss.moex.com/iss/reference/13 <br />
+    ///     Пример: https://iss.moex.com/iss/securities/SBER <br />
+    /// </summary>
     public class SecurityDefinitionRequest : IssRequest, IGetRequest<SecurityDefinitionResponse>
     {
         public SecurityDefinitionRequest(string secCode, IWebProxy webProxy = null)

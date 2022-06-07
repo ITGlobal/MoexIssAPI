@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System;
+using MoexIssAPI.Helper;
 
 namespace MoexIssAPI
 {
@@ -29,15 +30,14 @@ namespace MoexIssAPI
         /// Выполнить запрос по _url и вернуть json
         /// </summary>
         /// <returns></returns>
-        protected async Task<string> Fetch(IDictionary<string,string>? adds = null, CancellationToken token=default)
+        protected async Task<string> Fetch(IDictionary<string, object>? adds = null, CancellationToken token = default)
         {
-            if(_url == null) throw new Exception("_url must be defined");
+            if (_url == null) throw new Exception("_url must be defined");
 
             var json = "";
-            // new Uri("socks5://51.250.31.209:1080")
             using var handler = new HttpClientHandler { Proxy = _webProxy };
             using var httpClient = new HttpClient(handler);
-            var response = await httpClient.GetAsync(_url + (adds!=null? "?"+string.Join("&",adds.Select(a=>$"{a.Key}={a.Value}")): ""), token);
+            var response = await httpClient.GetAsync(_url + QueryHelper.CompileDict(adds), token);
             json = await response.Content.ReadAsStringAsync();
             return json;
         }

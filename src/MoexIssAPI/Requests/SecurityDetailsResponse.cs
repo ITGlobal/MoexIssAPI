@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace MoexIssAPI.Requests
 {
     public class SecurityDetailsResponse
     {
         [JsonProperty("securities")]
-        public IssResponsePayload Details { get; set; }
+        public IssResponsePayload Securities { get; set; }
+
+        [JsonProperty("marketdata")]
+        public IssResponsePayload Marketdata { get; set; }
+
+        [JsonProperty("dataversion")]
+        public IssResponsePayload Dataversion { get; set; }
     }
 }

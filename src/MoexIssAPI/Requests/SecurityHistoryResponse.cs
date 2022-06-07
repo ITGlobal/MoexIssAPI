@@ -1,7 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MoexIssAPI.Requests
 {
@@ -13,14 +10,5 @@ namespace MoexIssAPI.Requests
 
         [JsonProperty("history.cursor")]
         public IssResponsePayload Cursor { get; set; }
-
-        [JsonProperty("securities")]
-        public IssResponsePayload Securities { get; set; }
-
-        [JsonProperty("marketdata")]
-        public IssResponsePayload Marketdata { get; set; }
-
-        [JsonProperty("dataversion")]
-        public IssResponsePayload Dataversion { get; set; }
     }
 }
